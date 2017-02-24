@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
+
 namespace CrazyMouse
 {
     public partial class Form1 : Form
@@ -12,6 +13,7 @@ namespace CrazyMouse
         private List<int> lsY = new List<int>();
         private int mousesteps = new int();
         private int mousestepscount = new int();
+
         public Form1()
         {
             InitializeComponent();
@@ -106,7 +108,7 @@ namespace CrazyMouse
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("\tInstruction \n\n1) Start = Home \n2) Stop = End \n3) Tag Coordinate = Ctrl");
+            MessageBox.Show("\tInstruction \n\n1) Start = Home \n2) Stop = End \n3) Tag Coordinate = Ctrl\n\n\tInformation\n\nAuthor of program Suren Khachatryan\nE-mail: surench94@gmail.com");
         }
 
         private void button1_Click(object sender, EventArgs e)
