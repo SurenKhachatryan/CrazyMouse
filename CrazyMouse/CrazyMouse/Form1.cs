@@ -12,7 +12,7 @@ namespace CrazyMouse
         private List<int> lsY = new List<int>();
         private int mousesteps = new int();
         private int mousestepscount = new int();
-
+        private int cycle = new int();
         #region Part 1 keyboard hook
         public delegate void LLKeyboardHook(int Code, int wParam, ref keyBoardHookStruct lParam);
         private int sum = new int();
@@ -37,7 +37,7 @@ namespace CrazyMouse
         private static extern IntPtr SetWindowsHookEx(int idHook, LLKeyboardHook callback, IntPtr hInstance, uint theardID);
         [DllImport("kernel32.dll")]
         private static extern IntPtr LoadLibrary(string lpFileName);
-        
+
         public struct keyBoardHookStruct
         {
             public int vkCode;
@@ -102,13 +102,7 @@ namespace CrazyMouse
         private enum MOUSEEVENTF
         {
             LEFTDOWN = 0x00000002,
-            LEFTUP = 0x00000004,
-            MIDDLEDOWN = 0x00000020,
-            MIDDLEUP = 0x00000040,
-            MOVE = 0x00000001,
-            ABSOLUTE = 0x00008000,
-            RIGHTDOWN = 0x00000008,
-            RIGHTUP = 0x00000010
+            LEFTUP = 0x00000004
         }
         #region Mouse Move
 
@@ -131,7 +125,11 @@ namespace CrazyMouse
             GetCursorPos(ref cursor);
             int[] arrX = lsX.ToArray();
             int[] arrY = lsY.ToArray();
-            if (mousestepscount != Convert.ToInt32(textBox1.Text))
+            if (!checkBox1.Checked)
+            {
+                cycle = Convert.ToInt32(textBox1.Text);
+            }
+            if (mousestepscount != cycle)
             {
                 if (mousesteps < arrX.Length)
                 {
@@ -162,7 +160,8 @@ namespace CrazyMouse
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("\tInstruction \n\n1) Start = Home \n2) Stop = End \n3) Tag Coordinate " +
-                "= Ctrl\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Carzy Mouse\nAuthor: Suren Khachatryan\nE-mail: surench94@gmail.com");
+                "= Ctrl\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Carzy Mouse\nAuthor:" +
+                " Suren Khachatryan\nE-mail: surench94@gmail.com\n\n\t Made in Armenia");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -188,6 +187,20 @@ namespace CrazyMouse
             if (!Char.IsDigit(chr) && chr != 8 || textBox1.Text == "" && chr == '0')
             {
                 e.Handled = true;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox1.Enabled = false;
+                cycle = Int32.MaxValue;
+            }
+            else
+            {
+
+                textBox1.Enabled = true;
             }
         }
     }
