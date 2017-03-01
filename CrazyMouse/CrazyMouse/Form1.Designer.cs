@@ -61,6 +61,7 @@
             // 
             // domainUpDown2
             // 
+            this.domainUpDown2.Items.Add("1");
             this.domainUpDown2.Items.Add("10");
             this.domainUpDown2.Items.Add("20");
             this.domainUpDown2.Items.Add("30");
@@ -1106,7 +1107,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(41, 23);
             this.button2.TabIndex = 7;
-            this.button2.Text = "Halp";
+            this.button2.Text = "Help";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1156,7 +1157,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Crazy Mouse";
             this.TopMost = true;
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
