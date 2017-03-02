@@ -51,7 +51,7 @@ namespace CrazyMouse
             Keys key = (Keys)lParam.vkCode;
             var cursor = new Point();
             GetCursorPos(ref cursor);
-            if ((key == Keys.Add || key == Keys.Oemplus) && sum % 2 != 0)
+            if ((key == Keys.Add || key == Keys.Oemplus) && sum % 2 != 0 && label2.Text != "ON")
             {
                 listBoxY.Items.Add("X" + cursor.X.ToString());
                 listBoxX.Items.Add("Y" + cursor.Y.ToString());
