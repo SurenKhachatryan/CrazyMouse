@@ -61,7 +61,7 @@ namespace CrazyMouse
                 panel1.BackColor = Color.Red;
             }
             else
-            if (key == Keys.End && listBoxX.Items.Count != 0 && label2.Text != "Finish")
+            if (key == Keys.End && listBoxX.Items.Count != 0 && label2.Text != "Finish" && label2.Text != "OFF")
             {
                 timer2.Stop();
                 timer1.Start();
@@ -69,7 +69,7 @@ namespace CrazyMouse
                 panel1.BackColor = Color.Red;
             }
             else
-            if (key == Keys.Home && listBoxX.Items.Count != 0)
+            if (key == Keys.Home && listBoxX.Items.Count != 0 && label2.Text != "ON")
             {
                 if (textBox1.Text != "" )
                 {
