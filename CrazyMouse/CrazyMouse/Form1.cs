@@ -42,52 +42,49 @@ namespace CrazyMouse
         {
             public int vkCode;
         }
-
         private const int WH_KEYBOARD_LL = 13;
-        private const int WM_KEYDOWN = 0x0100;
-        private const int WM_KEYUP = 0x0101;
-        private const int WM_SYSKEYDOWN = 0x0104;
-        private const int WM_SYSKEYUP = 0x0105;
-
-        private List<Keys> HookedKeys = new List<Keys>();
 
         private void HookProc(int Code, int wParam, ref keyBoardHookStruct lParam)
         {
             #region Coordinate Marking
             sum++;
-            if (sum % 2 != 0)
+            Keys key = (Keys)lParam.vkCode;
+            var cursor = new Point();
+            GetCursorPos(ref cursor);
+            if ((key == Keys.Add || key == Keys.Oemplus) && sum % 2 != 0)
             {
-                Keys key = (Keys)lParam.vkCode;
-                var cursor = new Point();
-                GetCursorPos(ref cursor);
-                if (key == Keys.LControlKey || key == Keys.RControlKey)
+                listBoxY.Items.Add("X" + cursor.X.ToString());
+                listBoxX.Items.Add("Y" + cursor.Y.ToString());
+                lsX.Add(Convert.ToInt32(cursor.X.ToString()));
+                lsY.Add(Convert.ToInt32(cursor.Y.ToString()));
+                label2.Text = "OFF";
+                panel1.BackColor = Color.Red;
+            }
+            else
+            if (key == Keys.End && listBoxX.Items.Count != 0 && label2.Text != "Finish")
+            {
+                timer2.Stop();
+                timer1.Start();
+                label2.Text = "OFF";
+                panel1.BackColor = Color.Red;
+            }
+            else
+            if (key == Keys.Home && listBoxX.Items.Count != 0)
+            {
+                if (textBox1.Text != "" )
                 {
-                    listBoxY.Items.Add("X" + cursor.X.ToString());
-                    listBoxX.Items.Add("Y" + cursor.Y.ToString());
-                    lsX.Add(Convert.ToInt32(cursor.X.ToString()));
-                    lsY.Add(Convert.ToInt32(cursor.Y.ToString()));
+                    label1.Text = "0";
+                    mousesteps = 0;
+                    mousestepscount = 0;
+                    timer2.Start();
+                    timer1.Stop();
+                    sum = 0;
+                    label2.Text = "ON";
+                    panel1.BackColor = Color.Green;
                 }
                 else
-                if (key == Keys.End)
                 {
-                    timer2.Stop();
-                    timer1.Start();
-                }
-                else
-                if (key == Keys.Home)
-                {
-                    if (textBox1.Text != "")
-                    {
-                        label1.Text = "0";
-                        mousesteps = 0;
-                        mousestepscount = 0;
-                        timer2.Start();
-                        timer1.Stop();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please Enter Count Cycle");
-                    }
+                    MessageBox.Show("Please Enter Count Cycle");
                 }
             }
             #endregion
@@ -152,6 +149,8 @@ namespace CrazyMouse
             {
                 timer2.Stop();
                 timer1.Start();
+                label2.Text = "Finish";
+                panel1.BackColor = Color.YellowGreen;
             }
             sum = new int();
         }
@@ -160,7 +159,7 @@ namespace CrazyMouse
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("\tInstruction \n\n1) Start = Home \n2) Stop = End \n3) Tag Coordinate " +
-                "= Ctrl\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Carzy Mouse\nAuthor:" +
+                "= Add(+) and Oemplus(=,+)\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Carzy Mouse\nAuthor:" +
                 " Suren Khachatryan\nE-mail: surench94@gmail.com\n\n\t Made in Armenia");
         }
 
@@ -173,6 +172,9 @@ namespace CrazyMouse
                 lsX.Clear();
                 lsY.Clear();
                 label1.Text = "0";
+                sum = 0;
+                label2.Text = "OFF";
+                panel1.BackColor = Color.Red;
             }
             else
             {
@@ -199,7 +201,6 @@ namespace CrazyMouse
             }
             else
             {
-
                 textBox1.Enabled = true;
             }
         }
