@@ -1071,7 +1071,7 @@
             this.domainUpDown2.ReadOnly = true;
             this.domainUpDown2.Size = new System.Drawing.Size(52, 20);
             this.domainUpDown2.TabIndex = 3;
-            this.domainUpDown2.Text = "10";
+            this.domainUpDown2.Text = "1";
             // 
             // labelX
             // 
@@ -1152,7 +1152,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.BackColor = System.Drawing.Color.Orange;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(174, 31);

@@ -58,7 +58,7 @@ namespace CrazyMouse
                 lsX.Add(Convert.ToInt32(cursor.X.ToString()));
                 lsY.Add(Convert.ToInt32(cursor.Y.ToString()));
                 label2.Text = "OFF";
-                panel1.BackColor = Color.Red;
+                panel1.BackColor = Color.Orange;
             }
             else
             if (key == Keys.End && listBoxX.Items.Count != 0 && label2.Text != "Finish" && label2.Text != "OFF")
@@ -66,12 +66,33 @@ namespace CrazyMouse
                 timer2.Stop();
                 timer1.Start();
                 label2.Text = "OFF";
-                panel1.BackColor = Color.Red;
+                panel1.BackColor = Color.Orange;
+            }
+            else
+            if (key == Keys.Multiply && label2.Text != "ON")
+            {
+                if (listBoxX.Items.Count != 0)
+                {
+                    Reset();
+                }
+            }
+            else
+            if ((key == Keys.OemMinus || key == Keys.Subtract) && sum % 2 != 0 && listBoxY.Items.Count != 0 && label2.Text != "ON")
+            {
+                listBoxY.Items.RemoveAt(lsX.ToArray().Length - 1);
+                listBoxX.Items.RemoveAt(lsY.ToArray().Length - 1);
+                lsX.RemoveAt(lsX.ToArray().Length - 1);
+                lsY.RemoveAt(lsY.ToArray().Length - 1);
+                label1.Text = "0";
+                mousesteps = 0;
+                mousestepscount = 0;
+                label2.Text = "OFF";
+                panel1.BackColor = Color.Orange;
             }
             else
             if (key == Keys.Home && listBoxX.Items.Count != 0 && label2.Text != "ON")
             {
-                if (textBox1.Text != "" )
+                if (textBox1.Text != "" || cycle != 0)
                 {
                     label1.Text = "0";
                     mousesteps = 0;
@@ -159,11 +180,16 @@ namespace CrazyMouse
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("\tInstruction \n\n1) Start = Home \n2) Stop = End \n3) Tag Coordinate " +
-                "= Add(+) and Oemplus(=,+)\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Carzy Mouse\nAuthor:" +
+                "= Plus ( + ) and OemPlus ( = + )\n4) Backspace = Minus ( - ) and OemMinus ( _ - ) \n5)" +
+                " Reset = Multiplication ( x , * )\n\n\tInformation\n\nYear: 2017\nVersion: 1.0\nName: Crazy Mouse\nAuthor:" +
                 " Suren Khachatryan\nE-mail: surench94@gmail.com\n\n\t Made in Armenia");
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+        private void Reset()
         {
             if (listBoxX.Items.Count != 0 && listBoxY.Items.Count != 0)
             {
@@ -172,9 +198,11 @@ namespace CrazyMouse
                 lsX.Clear();
                 lsY.Clear();
                 label1.Text = "0";
+                mousesteps = 0;
+                mousestepscount = 0;
                 sum = 0;
                 label2.Text = "OFF";
-                panel1.BackColor = Color.Red;
+                panel1.BackColor = Color.Orange;
             }
             else
             {
